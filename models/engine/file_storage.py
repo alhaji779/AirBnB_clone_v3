@@ -58,6 +58,29 @@ class FileStorage:
         except Exception:
             pass
 
+    def get(self, cls, id):
+        """
+        function to gets specific object
+        """
+        all_class = self.all(cls)
+
+        for obj in all_class.values():
+            if id == str(obj.id):
+                return obj
+
+        return None
+
+    def count(self, cls=None):
+        """
+        function to count of instances
+        """
+        if not cls:
+            return len(self.all())
+        if cls in classes.values():
+            return len(self.all(cls))
+        if cls not in classes.values():
+            return
+
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
         if obj is not None:
