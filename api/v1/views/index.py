@@ -5,7 +5,7 @@ index page for airbnb
 from flask import Flask, jsonify, make_response
 from api.v1.views import app_views
 from models import storage
-app = Flask(__name__)
+
 
 @app_views.route('/status', strict_slashes=False)
 def show_stat():
@@ -17,11 +17,11 @@ def show_stat():
 def get_count():
     """ returns count of data """
     all_dict = {"amenities": 'Amenity',
-                  "cities": 'City',
-                  "places": 'Place',
-                  "reviews": 'Review',
-                  "states": 'State',
-                  "users": 'User'}
+                "cities": 'City',
+                "places": 'Place',
+                "reviews": 'Review',
+                "states": 'State',
+                "users": 'User'}
 
     for key in count_dict.keys():
         all_dict[key] = storage.count(all_dict.get(key))
