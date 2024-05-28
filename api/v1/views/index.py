@@ -1,28 +1,28 @@
 #!/usr/bin/python3
-""" index file
-"""
-from flask import Flask, jsonify
-from models import storage
+'''
+index page for airbnb
+'''
+from flask import Flask, jsonify, make_response
 from api.v1.views import app_views
+from models import storage
 
 
-@app_views.route('/status', strict_slashes=False)
-def show_stat():
-    """Returns the status of the API"""
+@app_views.route('/status')
+def getStatus():
+    """ returns status """
     return jsonify({'status': 'OK'})
 
 
-@app_views.route('/stats', strict_slashes=False)
-def get_count():
-    """Returns the count of all objects by type"""
-    all_dict = {
-        "amenities": 'Amenity',
-        "cities": 'City',
-        "places": 'Place',
-        "reviews": 'Review',
-        "states": 'State',
-        "users": 'User'
-    }
-    for key in all_dict.keys():
-        all_dict[key] = storage.count(all_dict[key])
-    return jsonify(all_dict)
+@app_views.route('/stats')
+def getCount():
+    """ returns count of data """
+    count_dict = {"amenities": 'Amenity',
+                  "cities": 'City',
+                  "places": 'Place',
+                  "reviews": 'Review',
+                  "states": 'State',
+                  "users": 'User'}
+
+    for k in count_dict.keys():
+        count_dict[k] = storage.count(count_dict.get(k))
+    return jsonify(count_dict)
